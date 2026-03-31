@@ -2,31 +2,33 @@
 
 export default function NoteCard({ note, deleteNote, togglePin, editNote }) {
   return (
-    <div className="bg-gray-900 p-4 rounded-xl shadow">
-      <h3 className="text-lg font-bold">{note.title}</h3>
-      <p className="text-sm text-gray-300">{note.desc}</p>
-      <small className="text-purple-400">{note.category}</small>
-
-      <div className="flex gap-2 mt-3">
+    <div className="card p-6 mb-4">
+      <div className="flex items-center justify-between mb-2">
+        <h3 className="text-xl font-extrabold text-purple-300 drop-shadow-sm">{note.title}</h3>
+        <span className={`px-3 py-1 rounded-full text-xs font-semibold ${note.category === 'Work' ? 'bg-blue-900 text-blue-200' : note.category === 'Personal' ? 'bg-pink-900 text-pink-200' : 'bg-green-900 text-green-200'}`}>{note.category}</span>
+      </div>
+      <p className="text-base text-gray-200 mb-3 min-h-12">{note.desc}</p>
+      <div className="flex gap-2 mt-2">
         <button
           onClick={() => togglePin(note.id)}
-          className="bg-yellow-500 px-2 py-1 rounded"
+          className={`px-3 py-1 bg-yellow-400/90 text-yellow-900 hover:bg-yellow-300 shadow-sm`}
+          title={note.pinned ? "Unpin note" : "Pin note"}
         >
-          {note.pinned ? "Unpin" : "Pin"}
+          {note.pinned ? "📌 Unpin" : "📌 Pin"}
         </button>
-
         <button
           onClick={() => editNote(note)}
-          className="bg-blue-500 px-2 py-1 rounded"
+          className="px-3 py-1 bg-blue-500/90 text-white hover:bg-blue-400 shadow-sm"
+          title="Edit note"
         >
-          Edit
+          ✏️ Edit
         </button>
-
         <button
           onClick={() => deleteNote(note.id)}
-          className="bg-red-500 px-2 py-1 rounded"
+          className="px-3 py-1 bg-red-500/90 text-white hover:bg-red-400 shadow-sm"
+          title="Delete note"
         >
-          Delete
+          🗑️ Delete
         </button>
       </div>
     </div>
